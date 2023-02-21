@@ -20,14 +20,13 @@ use Illuminate\Support\Facades\Facade;
  * @method static void restore($identifier)
  * @method static Illuminate\Support\Collection search(Closure $search)
  * 
- * @method static void addCost(string $name, float $price)
- * @method static string getCost(string $name, ?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null)
  * @method static void setTax($rowId, $taxRate)
  * 
  * @method static string total($decimals = null, $decimalPoint = null, $thousandSeparator = null)
  * @method static string tax($decimals = null, $decimalPoint = null, $thousandSeparator = null)
  * @method static string subtotal($decimals = null, $decimalPoint = null, $thousandSeparator = null)
- * 
+ * @method static void|float cost(string|\Gloudemans\Shoppingcart\Enums\CostType $name, ?float $price = null)
+ * @method static string costFormat(string|\Gloudemans\Shoppingcart\Enums\CostType $name, ?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null)
  * 
  * @see \Gloudemans\Shoppingcart\Cart
  */

@@ -8,6 +8,7 @@ use Orchestra\Testbench\TestCase;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Collection;
 use Gloudemans\Shoppingcart\CartItem;
+use Gloudemans\Shoppingcart\Enums\CostType;
 use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
 use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
 use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
@@ -912,20 +913,21 @@ class CartTest extends TestCase
     }
 
     #[Test]
-    public function it_will_add_cost()
+    public function it_will_add_cost_and_format()
     {
         $cart = $this->getCart();
-        $cart->addCost(Cart::COST_SHIPPING, 4.99);
-        $cart->addCost(Cart::COST_TRANSACTION, 2.11);
-        $cart->addCost('one time payment', 1599.99);
 
-        $this->assertEquals(4.99, $cart->getCost(Cart::COST_SHIPPING));
-        $this->assertEquals('4,9900', $cart->getCost(Cart::COST_SHIPPING, 4, ','));
-        $this->assertEquals(2.11, $cart->getCost(Cart::COST_TRANSACTION));
-        $this->assertEquals('2,1100', $cart->getCost(Cart::COST_TRANSACTION, 4, ','));
+        $cart->cost(CostType::Shipping, 4.99);
+        $cart->cost(CostType::Transaction, 2.11);
+        $cart->cost('one time payment', 1599.99);
 
-        $this->assertEquals('1,599.99', $cart->getCost('one time payment'));
-        $this->assertEquals('1 599,990', $cart->getCost('one time payment', 3, ',', ' '));
+        $this->assertEquals(4.99, $cart->cost(CostType::Shipping));
+        $this->assertEquals('4,9900', $cart->costFormat(CostType::Shipping, 4, ','));
+        $this->assertEquals(2.11, $cart->cost(CostType::Transaction));
+        $this->assertEquals('2,1100', $cart->costFormat(CostType::Transaction, 4, ','));
+
+        $this->assertEquals(1599.99, $cart->cost('one time payment'));
+        $this->assertEquals('1 599,990', $cart->costFormat('one time payment', 3, ',', ' '));
     }
 
     #[Test]
@@ -933,8 +935,8 @@ class CartTest extends TestCase
     {
         $cart = $this->getCart();
 
-        $cart->addCost('random cost', 21.54);
-        $cart->addCost('random cost 2', 69.96);
+        $cart->cost('random cost', 21.54);
+        $cart->cost('random cost 2', 69.96);
 
         $this->assertEquals(0, $cart->subtotal());
         $this->assertEquals(21.54 + 69.96, $cart->total());

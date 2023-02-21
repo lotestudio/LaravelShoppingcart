@@ -9,6 +9,7 @@ use Illuminate\Session\SessionManager;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Contracts\Events\Dispatcher;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
+use Gloudemans\Shoppingcart\Enums\CostType;
 use Gloudemans\Shoppingcart\Exceptions\UnknownModelException;
 use Gloudemans\Shoppingcart\Exceptions\InvalidRowIDException;
 use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
@@ -16,9 +17,6 @@ use Gloudemans\Shoppingcart\Exceptions\CartAlreadyStoredException;
 class Cart
 {
     const DEFAULT_INSTANCE = 'default';
-
-    const COST_SHIPPING = 'shipping';
-    const COST_TRANSACTION = 'transaction';
 
     /**
      * Instance of the session manager.
@@ -105,28 +103,6 @@ class Cart
         $this->session->put($this->instance, $content);
 
         return $cartItem;
-    }
-
-    /**
-     * Sets/adds an additional cost on the cart.
-     *
-     * @todo add in session
-     */
-    public function addCost(string $name, float $price): void
-    {
-        $oldCost = $this->extraCosts->pull($name, 0);
-
-        $this->extraCosts->put($name, $price + $oldCost);
-    }
-
-    /**
-     * Gets an additional cost by name
-     */
-    public function getCost(string $name, ?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null): string
-    {
-        $cost = $this->extraCosts->get($name, 0);
-
-        return $this->numberFormat($cost, $decimals, $decimalPoint, $thousandSeparator);
     }
 
     /**
@@ -295,6 +271,34 @@ class Cart
         }, 0);
 
         return $this->numberFormat($subTotal, $decimals, $decimalPoint, $thousandSeparator);
+    }
+
+    /**
+     * Get or set specific cost in the cart.
+     * 
+     * @return void|float
+     */
+    public function cost(string|CostType $type, ?float $price = null)
+    {
+        if (is_a($type, CostType::class))
+            $type = strtolower($type->name);
+
+        if ($price === null)
+            return $this->extraCosts->get($type, 0);
+        else
+        {
+            $oldCost = $this->extraCosts->pull($type, 0);
+
+            $this->extraCosts->put($type, $price + $oldCost);
+        }
+    }
+
+    /**
+     * Format a cost in the cart
+     */
+    public function costFormat(string|CostType $type, ?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null): string
+    {
+        return $this->numberFormat($this->cost($type), $decimals, $decimalPoint, $thousandSeparator);
     }
 
     /**

@@ -19,8 +19,10 @@ Run the Composer require command from the Terminal:
 
 Litteraly not much but
 
-* Added [`Cart::addCost()`](#cartaddcost), [`Cart::getCost()`](#cartgetcost)
+* Added `Cart::cost()`, `Cart::costFormat()` and enum `CostType`
 * More recent Laravel support
+* More typed parameters, returns, ...
+* Refactoring
 
 
 ## Overview and usage
