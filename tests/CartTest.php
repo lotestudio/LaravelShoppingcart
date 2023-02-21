@@ -911,6 +911,35 @@ class CartTest extends TestCase
         event(new Logout('web', $user));
     }
 
+    #[Test]
+    public function it_will_add_cost()
+    {
+        $cart = $this->getCart();
+        $cart->addCost(Cart::COST_SHIPPING, 4.99);
+        $cart->addCost(Cart::COST_TRANSACTION, 2.11);
+        $cart->addCost('one time payment', 1599.99);
+
+        $this->assertEquals(4.99, $cart->getCost(Cart::COST_SHIPPING));
+        $this->assertEquals('4,9900', $cart->getCost(Cart::COST_SHIPPING, 4, ','));
+        $this->assertEquals(2.11, $cart->getCost(Cart::COST_TRANSACTION));
+        $this->assertEquals('2,1100', $cart->getCost(Cart::COST_TRANSACTION, 4, ','));
+
+        $this->assertEquals('1,599.99', $cart->getCost('one time payment'));
+        $this->assertEquals('1 599,990', $cart->getCost('one time payment', 3, ',', ' '));
+    }
+
+    #[Test]
+    public function it_will_calculate_all_costs()
+    {
+        $cart = $this->getCart();
+
+        $cart->addCost('random cost', 21.54);
+        $cart->addCost('random cost 2', 69.96);
+
+        $this->assertEquals(0, $cart->subtotal());
+        $this->assertEquals(21.54 + 69.96, $cart->total());
+    }
+
     /**
      * Get an instance of the cart.
      *
