@@ -17,10 +17,8 @@ trait CanBeBought
 
     /**
      * Get the description or title of the Buyable item.
-     *
-     * @return string
      */
-    public function getBuyableDescription($options = null)
+    public function getBuyableDescription($options = null): ?string
     {
         if(property_exists($this, 'name')) return $this->name;
         if(property_exists($this, 'title')) return $this->title;
@@ -31,10 +29,8 @@ trait CanBeBought
 
     /**
      * Get the price of the Buyable item.
-     *
-     * @return float
      */
-    public function getBuyablePrice($options = null)
+    public function getBuyablePrice($options = null): ?float
     {
         if(property_exists($this, 'price')) return $this->price;
 
