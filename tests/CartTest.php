@@ -242,7 +242,7 @@ class CartTest extends TestCase
 
         $cart = $this->getCart();
 
-        $cart->add(1, 'Some title', 'invalid', 10.00);
+        $cart->add(1, 'Some title', -2, 10.00);
     }
 
     #[Test]
@@ -253,7 +253,7 @@ class CartTest extends TestCase
 
         $cart = $this->getCart();
 
-        $cart->add(1, 'Some title', 1, 'invalid');
+        $cart->add(1, 'Some title', 1, -3);
     }
 
     #[Test]
@@ -908,7 +908,7 @@ class CartTest extends TestCase
 
         $user = Mockery::mock(Authenticatable::class);
 
-        event(new Logout($user));
+        event(new Logout('web', $user));
     }
 
     /**
