@@ -3,7 +3,6 @@
 namespace Gloudemans\Tests\Shoppingcart;
 
 use Mockery;
-use PHPUnit\Framework\Assert;
 use Gloudemans\Shoppingcart\Cart;
 use Orchestra\Testbench\TestCase;
 use Illuminate\Auth\Events\Logout;
@@ -337,9 +336,7 @@ class CartTest extends TestCase
         Event::assertDispatched('cart.updated');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_will_throw_an_exception_if_a_rowid_was_not_found()
     {
         $this->expectException(InvalidRowIDException::class);
