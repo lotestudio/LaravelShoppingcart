@@ -75,13 +75,14 @@ class Cart
     /**
      * Add an item to the cart.
      *
-     * @param mixed     $id
-     * @param mixed     $name
-     * @param int|float $qty
-     * @param float     $price
-     * @param array     $options
+     * @param array|Buyable|int|string $id
+     * @param mixed $name
+     * @param int|float|null $qty
+     * @param ?float $price
+     * 
+     * @return CartItem|CartItem[]
      */
-    public function add($id, $name = null, $qty = null, $price = null, array $options = []): CartItem
+    public function add($id, $name = null, $qty = null, $price = null, array $options = [])
     {
         if ($this->isMulti($id)) {
             return array_map(function ($item) {
@@ -465,7 +466,7 @@ class Cart
      * @param mixed     $name
      * @param int|float $qty
      */
-    private function createCartItem($id, $name, $qty, float $price, array $options): CartItem
+    private function createCartItem($id, $name, $qty, ?float $price, array $options): CartItem
     {
         if ($id instanceof Buyable) {
             $cartItem = CartItem::fromBuyable($id, $qty ?: []);

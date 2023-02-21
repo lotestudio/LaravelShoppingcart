@@ -58,7 +58,7 @@ class CartItem implements Arrayable, Jsonable
      *
      * @param int|string $id
      */
-    public function __construct($id, string $name, float $price, array $options = [])
+    public function __construct($id, ?string $name, float $price, array $options = [])
     {
         if(empty($id)) {
             throw new \InvalidArgumentException('Please supply a valid identifier.');
@@ -132,7 +132,7 @@ class CartItem implements Arrayable, Jsonable
      */
     public function setQuantity(int|float $qty)
     {
-        if(empty($qty))
+        if($qty < 1)
             throw new \InvalidArgumentException('Please supply a valid quantity.');
 
         $this->qty = $qty;
@@ -237,7 +237,12 @@ class CartItem implements Arrayable, Jsonable
      */
     public static function fromBuyable(Buyable $item, array $options = []): CartItem
     {
-        return new self($item->getBuyableIdentifier($options), $item->getBuyableDescription($options), $item->getBuyablePrice($options), $options);
+        return new self(
+            $item->getBuyableIdentifier($options),
+            $item->getBuyableDescription($options),
+            $item->getBuyablePrice($options), 
+            $options
+        );
     }
 
     /**
@@ -255,7 +260,7 @@ class CartItem implements Arrayable, Jsonable
      *
      * @param int|string $id
      */
-    public static function fromAttributes($id, string $name, float $price, array $options = []): CartItem
+    public static function fromAttributes($id, ?string $name, float $price, array $options = []): CartItem
     {
         return new self($id, $name, $price, $options);
     }
