@@ -17,11 +17,16 @@ Run the Composer require command from the Terminal:
 
 ### Difference between [Crinsane/LaravelShoppingcart](https://github.com/Crinsane/LaravelShoppingcart)
 
-Litteraly not much but
-
-* Added `Cart::cost()`, `Cart::costFormat()` and enum `CostType`
+* Added functionality
+    * `Cart::cost()`
+    * `Cart::costFormat()`
+    * Enum `CostType`
+    * `Cart::totalFormat()`
+    * `Cart::taxFormat()`
+    * `Cart::subtotalFormat()`
 * More recent Laravel support
-* More typed parameters, returns, ...
+* More typed parameters, returns, properties, ...
+* Less usage of magic properties - really dislike this one
 * Refactoring
 
 

@@ -22,9 +22,12 @@ use Illuminate\Support\Facades\Facade;
  * 
  * @method static void setTax($rowId, $taxRate)
  * 
- * @method static string total($decimals = null, $decimalPoint = null, $thousandSeparator = null)
- * @method static string tax($decimals = null, $decimalPoint = null, $thousandSeparator = null)
- * @method static string subtotal($decimals = null, $decimalPoint = null, $thousandSeparator = null)
+ * @method static float total()
+ * @method static string totalFormat(?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null)
+ * @method static float tax()
+ * @method static string taxFormat(?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null)
+ * @method static float subtotal()
+ * @method static string subtotalFormat(?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null)
  * @method static void|float cost(string|\Gloudemans\Shoppingcart\Enums\CostType $name, ?float $price = null)
  * @method static string costFormat(string|\Gloudemans\Shoppingcart\Enums\CostType $name, ?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null)
  * 

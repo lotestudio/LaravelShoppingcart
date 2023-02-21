@@ -215,12 +215,8 @@ class Cart
 
     /**
      * Get the total price of the items in the cart.
-     *
-     * @param int    $decimals
-     * @param string $decimalPoint
-     * @param string $thousandSeparator
      */
-    public function total($decimals = null, $decimalPoint = null, $thousandSeparator = null): string
+    public function total(): float
     {
         $content = $this->getContent();
 
@@ -234,43 +230,58 @@ class Cart
 
         $total += $totalCost;
 
-        return $this->numberFormat($total, $decimals, $decimalPoint, $thousandSeparator);
+        return $total;
     }
 
     /**
-     * Get the total tax of the items in the cart.
-     *
-     * @param int    $decimals
-     * @param string $decimalPoint
-     * @param string $thousandSeparator
+     * Gets the formatted total price of the items in the cart 
      */
-    public function tax($decimals = null, $decimalPoint = null, $thousandSeparator = null): string
+    public function totalFormat(?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null): string
+    {
+        return $this->numberFormat($this->total(), $decimals, $decimalPoint, $thousandSeparator);
+    }
+
+
+    /**
+     * Get the total tax of the items in the cart.
+     */
+    public function tax(): float
     {
         $content = $this->getContent();
 
-        $tax = $content->reduce(function ($tax, CartItem $cartItem) {
-            return $tax + ($cartItem->qty * $cartItem->tax);
-        }, 0);
+        return $content->reduce(
+            fn ($tax, CartItem $cartItem) => $tax + ($cartItem->qty * $cartItem->tax),
+            0
+        );
+    }
 
-        return $this->numberFormat($tax, $decimals, $decimalPoint, $thousandSeparator);
+    /**
+     * Get the formatted total tax of the items in the cart
+     */
+    public function taxFormat(?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null): string
+    {
+        return $this->numberFormat($this->tax(), $decimals, $decimalPoint, $thousandSeparator);
     }
 
     /**
      * Get the subtotal (total - tax) of the items in the cart.
-     *
-     * @param int    $decimals
-     * @param string $decimalPoint
-     * @param string $thousandSeparator
      */
-    public function subtotal($decimals = null, $decimalPoint = null, $thousandSeparator = null): string
+    public function subtotal(): float
     {
         $content = $this->getContent();
 
-        $subTotal = $content->reduce(function ($subTotal, CartItem $cartItem) {
-            return $subTotal + ($cartItem->qty * $cartItem->price);
-        }, 0);
+        return $content->reduce(
+            fn ($subTotal, CartItem $cartItem) => $subTotal + ($cartItem->qty * $cartItem->price),
+            0
+        );
+    }
 
-        return $this->numberFormat($subTotal, $decimals, $decimalPoint, $thousandSeparator);
+    /**
+     * Gets the formatted subtotal of the items in the cart.
+     */
+    public function subtotalFormat(?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null): string
+    {
+        return $this->numberFormat($this->subtotal(), $decimals, $decimalPoint, $thousandSeparator);
     }
 
     /**
@@ -414,29 +425,6 @@ class Cart
     }
 
     /**
-     * Magic method to make accessing the total, tax and subtotal properties possible.
-     *
-     * @param string $attribute
-     * @return float|null
-     */
-    public function __get($attribute)
-    {
-        if($attribute === 'total') {
-            return $this->total();
-        }
-
-        if($attribute === 'tax') {
-            return $this->tax();
-        }
-
-        if($attribute === 'subtotal') {
-            return $this->subtotal();
-        }
-
-        return null;
-    }
-
-    /**
      * Get the carts content from session, if there is no cart content set yet, return a new empty Collection
      */
     protected function getContent(): Collection
@@ -517,9 +505,9 @@ class Cart
     }
 
     /**
-     * Get the Formated number
+     * Get the formatted number
      */
-    private function numberFormat($value, $decimals, $decimalPoint, $thousandSeparator): string
+    private function numberFormat($value, ?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null): string
     {
         if(is_null($decimals)){
             $decimals = config('cart.format.decimals', 2);

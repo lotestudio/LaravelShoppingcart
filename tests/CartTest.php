@@ -535,7 +535,7 @@ class CartTest extends TestCase
         $cart->add(new BuyableProduct(2, 'Second item', 2500.00), 2);
 
         $this->assertItemsInCart(3, $cart);
-        $this->assertEquals('6.000,00', $cart->subtotal(2, ',', '.'));
+        $this->assertEquals('6.000,00', $cart->subtotalFormat(2, ',', '.'));
     }
 
     #[Test]
@@ -714,7 +714,7 @@ class CartTest extends TestCase
         $cart->add(new BuyableProduct(1, 'Some title', 10.00), 1);
         $cart->add(new BuyableProduct(2, 'Some title', 20.00), 2);
 
-        $this->assertEquals(10.50, $cart->tax);
+        $this->assertEquals(10.50, $cart->tax());
     }
 
     #[Test]
@@ -725,7 +725,7 @@ class CartTest extends TestCase
         $cart->add(new BuyableProduct(1, 'Some title', 1000.00), 1);
         $cart->add(new BuyableProduct(2, 'Some title', 2000.00), 2);
 
-        $this->assertEquals('1.050,00', $cart->tax(2, ',', '.'));
+        $this->assertEquals('1.050,00', $cart->taxFormat(2, ',', '.'));
     }
 
     #[Test]
@@ -736,7 +736,7 @@ class CartTest extends TestCase
         $cart->add(new BuyableProduct(1, 'Some title', 10.00), 1);
         $cart->add(new BuyableProduct(2, 'Some title', 20.00), 2);
 
-        $this->assertEquals(50.00, $cart->subtotal);
+        $this->assertEquals(50.00, $cart->subtotal());
     }
 
     #[Test]
@@ -747,7 +747,7 @@ class CartTest extends TestCase
         $cart->add(new BuyableProduct(1, 'Some title', 1000.00), 1);
         $cart->add(new BuyableProduct(2, 'Some title', 2000.00), 2);
 
-        $this->assertEquals('5000,00', $cart->subtotal(2, ',', ''));
+        $this->assertEquals('5000,00', $cart->subtotalFormat(2, ',', ''));
     }
 
     #[Test]
@@ -760,13 +760,9 @@ class CartTest extends TestCase
         $cart->add(new BuyableProduct(1, 'Some title', 1000.00), 1);
         $cart->add(new BuyableProduct(2, 'Some title', 2000.00), 2);
 
-        $this->assertEquals('5000,00', $cart->subtotal());
-        $this->assertEquals('1050,00', $cart->tax());
-        $this->assertEquals('6050,00', $cart->total());
-
-        $this->assertEquals('5000,00', $cart->subtotal);
-        $this->assertEquals('1050,00', $cart->tax);
-        $this->assertEquals('6050,00', $cart->total);
+        $this->assertEquals('5000,00', $cart->subtotalFormat());
+        $this->assertEquals('1050,00', $cart->taxFormat());
+        $this->assertEquals('6050,00', $cart->totalFormat());
     }
 
     #[Test]
