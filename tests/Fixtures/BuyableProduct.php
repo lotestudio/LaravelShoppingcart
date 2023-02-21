@@ -47,20 +47,16 @@ class BuyableProduct implements Buyable
 
     /**
      * Get the description or title of the Buyable item.
-     *
-     * @return string
      */
-    public function getBuyableDescription($options = null)
+    public function getBuyableDescription($options = null): string
     {
         return $this->name;
     }
 
     /**
      * Get the price of the Buyable item.
-     *
-     * @return float
      */
-    public function getBuyablePrice($options = null)
+    public function getBuyablePrice($options = null): float
     {
         return $this->price;
     }
