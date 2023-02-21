@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static string currentInstance()
  * @method static \Gloudemans\Shoppingcart\Cart instance(?string $instance = null)
  * 
- * @method static \Gloudemans\Shoppingcart\CartItem get($rowId)
+ * @method static \Gloudemans\Shoppingcart\CartItem get(string $rowId)
  * @method static \Gloudemans\Shoppingcart\CartItem|\Gloudemans\Shoppingcart\CartItem[] add($id, $name = null, $qty = null, $price = null, array $options = [])
- * @method static ?\Gloudemans\Shoppingcart\CartItem update($rowId, $qty)
- * @method static void remove($rowId)
+ * @method static ?\Gloudemans\Shoppingcart\CartItem update(string $rowId, $qty)
+ * @method static void remove(string $rowId)
  * 
  * @method static void destroy()
  * @method static \Illuminate\Support\Collection content()
@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static void restore($identifier)
  * @method static \Illuminate\Support\Collection search(Closure $search)
  * 
- * @method static void setTax($rowId, $taxRate)
+ * @method static void setTax(string $rowId, $taxRate)
  * 
  * @method static float total()
  * @method static string totalFormat(?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null)

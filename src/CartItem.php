@@ -140,11 +140,8 @@ class CartItem implements Arrayable, Jsonable
 
     /**
      * Update the cart item from a Buyable.
-     *
-     * @param Buyable $item
-     * @return void
      */
-    public function updateFromBuyable(Buyable $item)
+    public function updateFromBuyable(Buyable $item): void
     {
         $this->id       = $item->getBuyableIdentifier($this->options);
         $this->name     = $item->getBuyableDescription($this->options);
@@ -154,11 +151,8 @@ class CartItem implements Arrayable, Jsonable
 
     /**
      * Update the cart item from an array.
-     *
-     * @param array $attributes
-     * @return void
      */
-    public function updateFromArray(array $attributes)
+    public function updateFromArray(array $attributes): void
     {
         $this->id       = Arr::get($attributes, 'id', $this->id);
         $this->qty      = Arr::get($attributes, 'qty', $this->qty);

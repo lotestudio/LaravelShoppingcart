@@ -108,10 +108,9 @@ class Cart
     /**
      * Update the cart item with the given rowId.
      *
-     * @param string $rowId
      * @param mixed  $qty
      */
-    public function update($rowId, $qty): ?CartItem
+    public function update(string $rowId, $qty): ?CartItem
     {
         $cartItem = $this->get($rowId);
 
@@ -150,10 +149,8 @@ class Cart
 
     /**
      * Remove the cart item with the given rowId from the cart.
-     *
-     * @param string $rowId
      */
-    public function remove($rowId): void
+    public function remove(string $rowId): void
     {
         $cartItem = $this->get($rowId);
 
@@ -168,10 +165,8 @@ class Cart
 
     /**
      * Get a cart item from the cart by its rowId.
-     *
-     * @param string $rowId
      */
-    public function get($rowId): CartItem
+    public function get(string $rowId): CartItem
     {
         $content = $this->getContent();
 
@@ -327,10 +322,9 @@ class Cart
     /**
      * Associate the cart item with the given rowId with the given model.
      *
-     * @param string $rowId
      * @param mixed  $model
      */
-    public function associate($rowId, $model): void
+    public function associate(string $rowId, $model): void
     {
         if(is_string($model) && ! class_exists($model)) {
             throw new UnknownModelException("The supplied model {$model} does not exist.");
@@ -350,10 +344,9 @@ class Cart
     /**
      * Set the tax rate for the cart item with the given rowId.
      *
-     * @param string    $rowId
      * @param int|float $taxRate
      */
-    public function setTax($rowId, $taxRate): void
+    public function setTax(string $rowId, $taxRate): void
     {
         $cartItem = $this->get($rowId);
 
