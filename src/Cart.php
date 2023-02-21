@@ -194,9 +194,8 @@ class Cart
      * Get a cart item from the cart by its rowId.
      *
      * @param string $rowId
-     * @return CartItem
      */
-    public function get($rowId)
+    public function get($rowId): CartItem
     {
         $content = $this->getContent();
 
@@ -235,9 +234,7 @@ class Cart
      */
     public function count()
     {
-        $content = $this->getContent();
-
-        return $content->sum('qty');
+        return $this->getContent()->sum('qty');
     }
 
     /**
@@ -436,17 +433,11 @@ class Cart
     }
 
     /**
-     * Get the carts content, if there is no cart content set yet, return a new empty Collection
-     *
-     * @return Collection
+     * Get the carts content from session, if there is no cart content set yet, return a new empty Collection
      */
-    protected function getContent()
+    protected function getContent(): Collection
     {
-        $content = $this->session->has($this->instance)
-            ? $this->session->get($this->instance)
-            : new Collection;
-
-        return $content;
+        return $this->session->get($this->instance, new Collection());
     }
 
     /**
