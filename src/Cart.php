@@ -110,10 +110,9 @@ class Cart
     /**
      * Sets/adds an additional cost on the cart.
      *
-     * @param float $price
      * @todo add in session
      */
-    public function addCost(string $name, $price)
+    public function addCost(string $name, float $price): void
     {
         $oldCost = $this->extraCosts->pull($name, 0);
 
@@ -122,14 +121,8 @@ class Cart
 
     /**
      * Gets an additional cost by name
-     * 
-     * @param $name
-     * @param int|null $decimals
-     * @param string|null $decimalPoint
-     * @param string|null $thousandSeparator
-     * @return string
      */
-    public function getCost($name, $decimals = null, $decimalPoint = null, $thousandSeparator = null)
+    public function getCost(string $name, ?int $decimals = null, ?string $decimalPoint = null, ?string $thousandSeparator = null): string
     {
         $cost = $this->extraCosts->get($name, 0);
 
@@ -253,9 +246,8 @@ class Cart
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeparator
-     * @return string
      */
-    public function total($decimals = null, $decimalPoint = null, $thousandSeparator = null)
+    public function total($decimals = null, $decimalPoint = null, $thousandSeparator = null): string
     {
         $content = $this->getContent();
 
@@ -278,9 +270,8 @@ class Cart
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeparator
-     * @return string
      */
-    public function tax($decimals = null, $decimalPoint = null, $thousandSeparator = null)
+    public function tax($decimals = null, $decimalPoint = null, $thousandSeparator = null): string
     {
         $content = $this->getContent();
 
@@ -297,9 +288,8 @@ class Cart
      * @param int    $decimals
      * @param string $decimalPoint
      * @param string $thousandSeparator
-     * @return string
      */
-    public function subtotal($decimals = null, $decimalPoint = null, $thousandSeparator = null)
+    public function subtotal($decimals = null, $decimalPoint = null, $thousandSeparator = null): string
     {
         $content = $this->getContent();
 
@@ -466,7 +456,7 @@ class Cart
      * @param mixed     $name
      * @param int|float $qty
      */
-    private function createCartItem($id, $name, $qty, ?float $price, array $options): CartItem
+    private function createCartItem($id, $name, $qty, ?float $price, array $options = []): CartItem
     {
         if ($id instanceof Buyable) {
             $cartItem = CartItem::fromBuyable($id, $qty ?: []);
@@ -535,11 +525,6 @@ class Cart
 
     /**
      * Get the Formated number
-     *
-     * @param $value
-     * @param $decimals
-     * @param $decimalPoint
-     * @param $thousandSeparator
      */
     private function numberFormat($value, $decimals, $decimalPoint, $thousandSeparator): string
     {
