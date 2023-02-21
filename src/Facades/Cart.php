@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Facade;
  * @method static void remove($rowId)
  * 
  * @method static void destroy()
- * @method static Illuminate\Support\Collection content()
+ * @method static \Illuminate\Support\Collection content()
  * @method static int|float count()
  * @method static void associate($orwId, $model)
  * @method static void store($identifier)
  * @method static void restore($identifier)
- * @method static Illuminate\Support\Collection search(Closure $search)
+ * @method static \Illuminate\Support\Collection search(Closure $search)
  * 
  * @method static void setTax($rowId, $taxRate)
  * 
