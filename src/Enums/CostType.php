@@ -7,7 +7,7 @@ enum CostType
     case Shipping;
     case Transaction;
 
-    public function description()
+    public function description(): string
     {
         return match($this) {
             self::Shipping => 'shipping cost',

@@ -428,8 +428,8 @@ class Cart
     /**
      * Create a new CartItem from the supplied attributes.
      *
-     * @param mixed     $id
-     * @param mixed     $name
+     * @param array|Buyable|int|string $id
+     * @param mixed $name
      * @param int|float $qty
      */
     private function createCartItem($id, $name, $qty, ?float $price, array $options = []): CartItem
