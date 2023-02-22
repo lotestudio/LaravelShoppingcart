@@ -266,7 +266,7 @@ class CartItem implements Arrayable, Jsonable
      *
      * @param string $id
      */
-    protected function generateRowId($id, array $options): string
+    private function generateRowId($id, array $options): string
     {
         ksort($options);
 

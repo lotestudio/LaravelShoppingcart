@@ -420,7 +420,7 @@ class Cart
     /**
      * Get the carts content from session, if there is no cart content set yet, return a new empty Collection
      */
-    protected function getContent(): Collection
+    private function getContent(): Collection
     {
         return $this->session->get($this->instance, new Collection());
     }
