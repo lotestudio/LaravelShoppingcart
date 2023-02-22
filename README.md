@@ -1,5 +1,5 @@
 ## LaravelShoppingcart
-[![Build Status](https://travis-ci.com/MichaelBelgium/LaravelShoppingcart.svg?branch=master)](https://travis-ci.com/MichaelBelgium/LaravelShoppingcart)
+[![CI Status](https://github.com/michaelbelgium/LaravelShoppingcart/actions/workflows/php.yml/badge.svg)](https://github.com/michaelbelgium/LaravelShoppingcart/actions)
 [![Total Downloads](https://poser.pugx.org/michaelbelgium/shoppingcart/downloads.png)](https://packagist.org/packages/michaelbelgium/shoppingcart)
 [![Latest Stable Version](https://poser.pugx.org/michaelbelgium/shoppingcart/v/stable)](https://packagist.org/packages/michaelbelgium/shoppingcart)
 [![Latest Unstable Version](https://poser.pugx.org/michaelbelgium/shoppingcart/v/unstable)](https://packagist.org/packages/michaelbelgium/shoppingcart)
