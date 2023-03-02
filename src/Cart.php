@@ -186,10 +186,8 @@ class Cart
 
     /**
      * Get the content of the cart.
-     *
-     * @return Collection
      */
-    public function content()
+    public function content(): Collection
     {
         if (!$this->session->has($this->instance)) {
             return new Collection();

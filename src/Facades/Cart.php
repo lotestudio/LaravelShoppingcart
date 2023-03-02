@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static void associate(string $rowId, $model)
  * @method static void store($identifier)
  * @method static void restore($identifier)
- * @method static \Illuminate\Support\Collection search(Closure $search)
+ * @method static \Illuminate\Support\Collection search(\Closure $search)
  * 
  * @method static void setTax(string $rowId, $taxRate)
  * 
