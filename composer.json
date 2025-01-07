@@ -1,5 +1,5 @@
 {
-    "name": "michaelbelgium/shoppingcart",
+    "name": "lotestudio/shoppingcart",
     "description": "Laravel Shoppingcart",
     "keywords": ["laravel", "shoppingcart"],
     "license": "MIT",
@@ -14,9 +14,9 @@
         }
     ],
     "require": {
-        "illuminate/support": "^11",
-        "illuminate/session": "^11",
-        "illuminate/events": "^11"
+        "illuminate/support": "^10 || ^11",
+        "illuminate/session": "^10 || ^11",
+        "illuminate/events": "^10 || ^11"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
