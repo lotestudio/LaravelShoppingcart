@@ -13,7 +13,7 @@ Install the package through [Composer](http://getcomposer.org/).
 
 Run the Composer require command from the Terminal:
 
-    composer require michaelbelgium/shoppingcart
+    composer require lotestudio/shoppingcart
 
 ### Difference between [Crinsane/LaravelShoppingcart](https://github.com/Crinsane/LaravelShoppingcart)
 
